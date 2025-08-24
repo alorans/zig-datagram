@@ -10,7 +10,7 @@ Look at the test cases in the file for how to use it.
 
 ## Style guidelines
 
-- Use [TIGER_STYLE](https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md) with a few exceptions, described below.
+- Try to use [TIGER_STYLE](https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md), with some caviats, as described below.
 
 ### Testing conventions
 
@@ -24,6 +24,7 @@ Look at the test cases in the file for how to use it.
 - Use errors to check external conditions, like user input.
 - High test coverage != high quality code
   - 100% coverage can be a huge waste of time and can lull you into a false sense of security.
+    - For example, your function could fail to handle an edge case, even if you have 100% coverage.
   - Slows CI builds (not really a concern for small projects, but something to consider)
   - Test for edge cases:
     - **Valid data**
@@ -31,8 +32,8 @@ Look at the test cases in the file for how to use it.
     - **Initially valid data that becomes invalid**
   - Interesting way to get code coverage data: https://zig.news/squeek502/code-coverage-for-zig-1dk1
 - Use static analysis?
-  - Zig is probably coming out with some better tools for memory leak and concurrency monitoring.
-  - Andrew Kelley's new concurrency method:
+  - I'm not really sure how to do that for Zig.
+  - Interesting idea for a lifetime checker: https://github.com/ityonemo/clr
 
 ### Naming conventions
 
@@ -40,7 +41,7 @@ Look at the test cases in the file for how to use it.
   - Short names can be MORE readable because they're instantly recognizable.
   - We have namespaces for a reason. Rule of thumb: if you're variable's name contains the name of the namespace it's in, you're doing something wrong.
 
-#### Syntax
+### Naming Syntax
 
 - **Functions**: lowerCamelCase
   - Function whose return type is `type`: UpperCamelCase
@@ -64,7 +65,8 @@ Look at the test cases in the file for how to use it.
 
 ### Commenting
 
-- Most code should be self-documenting.
+- Most code should be self-documenting-ish.
 - Comment things you don't want to forget.
+  - Comment "why" you did what you did.
 - Not every comment needs to be a full, eloquent sentence.
   - Sometimes short comments are actually more readable because they're instantly recognizable.
