@@ -102,13 +102,14 @@ pub const Receiver = struct {
         };
     }
 
+    const TIMEOUT_NONBLOCKING = 0;
+    const TIMEOUT_INFINITE = -1;
     /// Returns the number of bytes read.
-    /// Pass 0 timeout for non-blocking
-    /// Pass -1 for indefinite blocking
+    /// Special values: TIMEOUT_NONBLOCKING, TIMEOUT_INFINITE
     pub fn read(
         self: Receiver,
         buffer: *Buffer,
-        timeout_ms: i32, // zero for non-blocking
+        timeout_ms: i32,
     ) !u32 {
         assert(buffer.len == BUFFER_SIZE); // Precondition
 
@@ -192,7 +193,7 @@ test "Receiver/read without send" {
 
     // Try to read and verify no bytes received.
     var receiver_buffer: Buffer = undefined;
-    const received_bytes = try receiver.read(&receiver_buffer, 0);
+    const received_bytes = try receiver.read(&receiver_buffer, Receiver.TIMEOUT_NONBLOCKING);
     try std.testing.expectEqual(0, received_bytes);
 }
 
