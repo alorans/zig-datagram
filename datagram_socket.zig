@@ -1,3 +1,4 @@
+//! Pretty good single file Zig 0.14.1 wrapper for Unix domain datagram sockets.
 const std = @import("std");
 const assert = std.debug.assert;
 const builtin = @import("builtin");
