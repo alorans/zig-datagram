@@ -178,7 +178,7 @@ test "DatagramSocket/send and receive" {
 
     // Receive message and verify number of bytes received.
     var receiver_buffer: Buffer = undefined;
-    const received_bytes = try receiver.read(&receiver_buffer, 0);
+    const received_bytes = try receiver.read(&receiver_buffer, Receiver.TIMEOUT_NONBLOCKING);
     try std.testing.expectEqual(sender_buffer.len, received_bytes);
 
     // Verify the buffer contents
